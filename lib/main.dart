@@ -52,23 +52,27 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HeaderPage extends ConsumerWidget {
+class HeaderPage extends StatelessWidget {
+  const HeaderPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final int numb = ref.watch(counterProvider);
-
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.redAccent,
       child: Align(
-        child: Text(
-          "$numb",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 100,
-            decoration: TextDecoration.none,
-          ),
+        child: Consumer(
+          builder: (context, ref, child) {
+            final int numb = ref.watch(counterProvider);
+            return Text(
+              "$numb",
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 100,
+                decoration: TextDecoration.none,
+              ),
+            );
+          },
         ),
       ),
     );
